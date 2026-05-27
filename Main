@@ -1,0 +1,1344 @@
+```html
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KINNGS AI Network | Your Personalized AI for Productivity, Innovation & Health</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        kingGold: {
+                            50: '#fffdf0',
+                            100: '#fefbeb',
+                            200: '#fdf6c7',
+                            300: '#fbed97',
+                            400: '#f7db5d',
+                            500: '#f0c22a',
+                            600: '#d49b1a',
+                            700: '#b27515',
+                            800: '#905814',
+                            900: '#764613',
+                            950: '#452507',
+                        },
+                        cyberBlue: {
+                            50: '#f0fdff',
+                            100: '#e0faff',
+                            200: '#b8f5ff',
+                            300: '#7afdff',
+                            400: '#33f0ff',
+                            500: '#00d2f0',
+                            600: '#00a5c4',
+                            700: '#007f99',
+                            800: '#056275',
+                            900: '#095161',
+                            950: '#02303c',
+                        },
+                        hiveDark: {
+                            900: '#0b0c10',
+                            850: '#12141c',
+                            800: '#1a1d29',
+                            750: '#222635',
+                            700: '#2b3044',
+                        }
+                    },
+                    fontFamily: {
+                        rajdhani: ['Rajdhani', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        goldGlow: '0 0 25px rgba(212, 155, 26, 0.35)',
+                        blueGlow: '0 0 25px rgba(0, 210, 240, 0.35)',
+                        dualGlow: '0 0 35px rgba(0, 210, 240, 0.2), 0 0 35px rgba(212, 155, 26, 0.2)',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #050608;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4, .font-futuristic {
+            font-family: 'Rajdhani', sans-serif;
+            letter-spacing: 0.05em;
+        }
+        /* Custom Glowing Background Blobs */
+        .glow-blob-gold {
+            background: radial-gradient(circle, rgba(212, 155, 26, 0.15) 0%, rgba(0,0,0,0) 70%);
+        }
+        .glow-blob-blue {
+            background: radial-gradient(circle, rgba(0, 210, 240, 0.12) 0%, rgba(0,0,0,0) 70%);
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050608;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2b3044;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f0c22a;
+        }
+        /* Glassmorphism Classes */
+        .glass-panel {
+            background: rgba(18, 20, 28, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+        .glass-panel-gold {
+            background: rgba(18, 20, 28, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 155, 26, 0.2);
+        }
+        /* Interactive Scanning Lines */
+        .scanning-line {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0, 210, 240, 0.5), transparent);
+            animation: scan 4s linear infinite;
+        }
+        @keyframes scan {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(220px); }
+        }
+    </style>
+</head>
+<body class="min-h-screen relative flex flex-col justify-between">
+
+    <!-- Ambient Glowing Blobs -->
+    <div class="absolute top-0 left-1/4 w-[500px] h-[500px] glow-blob-gold pointer-events-none -translate-y-1/2"></div>
+    <div class="absolute top-[40%] right-10 w-[600px] h-[600px] glow-blob-blue pointer-events-none"></div>
+    <div class="absolute bottom-0 left-10 w-[500px] h-[500px] glow-blob-gold pointer-events-none translate-y-1/3"></div>
+
+    <!-- Notification Toast System -->
+    <div id="toast-container" class="fixed top-6 right-6 z-50 flex flex-col gap-3 pointer-events-none max-w-sm w-full"></div>
+
+    <!-- MAIN HEADER NAV -->
+    <header class="sticky top-0 z-40 w-full glass-panel border-b border-white/5 px-4 lg:px-12 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-3 cursor-pointer" onclick="navigate('landing')">
+            <!-- Custom Vector Representation of Authorized Trinity/Triangular Logo -->
+            <svg class="w-10 h-10 drop-shadow-[0_0_8px_rgba(212,155,26,0.6)]" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 10 L88 78 L12 78 Z" fill="url(#goldGradient)" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/>
+                <path d="M50 24 L76 72 L24 72 Z" fill="#0b0c10" stroke="#ffd700" stroke-width="1.5" stroke-linejoin="round"/>
+                <line x1="50" y1="10" x2="50" y2="44" stroke="#ffd700" stroke-width="2"/>
+                <line x1="88" y1="78" x2="62" y2="56" stroke="#ffd700" stroke-width="2"/>
+                <line x1="12" y1="78" x2="38" y2="56" stroke="#ffd700" stroke-width="2"/>
+                <!-- Glowing central core -->
+                <circle cx="50" cy="53" r="6" fill="#00e5ff" class="animate-pulse"/>
+                <defs>
+                    <linearGradient id="goldGradient" x1="50" y1="10" x2="50" y2="78" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="#FFDF73"/>
+                        <stop offset="50%" stop-color="#D49B1A"/>
+                        <stop offset="100%" stop-color="#452507"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+            <div>
+                <span class="text-2xl font-extrabold font-futuristic text-transparent bg-clip-text bg-gradient-to-r from-kingGold-400 via-kingGold-100 to-cyberBlue-400 leading-none">KINNGS</span>
+                <span class="text-xs block font-semibold text-cyberBlue-300 tracking-[0.25em] uppercase -mt-1">AI Network</span>
+            </div>
+        </div>
+
+        <!-- Dynamic User Status & Action Buttons -->
+        <div class="flex items-center gap-4">
+            <div id="user-badge" class="hidden md:flex items-center gap-3 px-3 py-1.5 rounded-lg bg-hiveDark-800 border border-white/5">
+                <span class="relative flex h-2.5 w-2.5">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                </span>
+                <span id="badge-username" class="text-xs font-semibold text-kingGold-300"></span>
+                <div class="h-4 w-px bg-white/10"></div>
+                <span id="badge-balance" class="text-xs font-bold text-cyberBlue-400">0 $KNGS</span>
+            </div>
+
+            <button id="nav-action-btn" onclick="startOnboarding()" class="px-5 py-2 rounded-lg bg-gradient-to-r from-kingGold-600 to-kingGold-400 hover:from-kingGold-500 hover:to-kingGold-300 text-hiveDark-900 font-bold text-sm shadow-goldGlow transition-all duration-300 hover:scale-105 flex items-center gap-2">
+                <i class="fa-solid fa-crown"></i> Launch Hive Terminal
+            </button>
+        </div>
+    </header>
+
+    <!-- CONTENT WRAPPER -->
+    <main class="flex-grow w-full max-w-7xl mx-auto px-4 lg:px-8 py-8 z-10">
+
+        <!-- ================= LANDING VIEW ================= -->
+        <div id="view-landing" class="space-y-16 py-6">
+            <!-- Hero Unit -->
+            <div class="text-center space-y-6 max-w-4xl mx-auto relative pt-10">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-hiveDark-800/80 border border-kingGold-500/30 text-xs font-bold text-kingGold-300 mb-2">
+                    <i class="fa-solid fa-sparkles text-cyberBlue-400 animate-spin" style="animation-duration: 4s"></i> 
+                    PHASE 1 ALPHA IS NOW LIVE
+                </div>
+                
+                <h1 class="text-5xl lg:text-7xl font-extrabold tracking-tight">
+                    Your Personalized AI for <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-kingGold-400 via-kingGold-200 to-cyberBlue-400">
+                        Productivity, Innovation & Health
+                    </span>
+                </h1>
+                
+                <p class="text-slate-400 text-lg max-w-2xl mx-auto leading-relaxed">
+                    Uniting hyper-personalized artificial intelligence (KAI), secure distributed storage (The Hive), and robotic guardian drone systems (KB) to elevate your cognitive and physical well-being.
+                </p>
+
+                <!-- Action Blocks -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+                    <button onclick="startOnboarding()" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-kingGold-600 via-kingGold-400 to-cyberBlue-400 text-hiveDark-900 font-extrabold text-base shadow-dualGlow hover:shadow-goldGlow transition-all duration-300 hover:scale-[1.03] flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-right-to-bracket text-lg"></i> Access The Hive Control Chamber
+                    </button>
+                    <a href="#kai-sandbox" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-hiveDark-850 hover:bg-hiveDark-800 border border-white/5 hover:border-cyberBlue-500/30 font-semibold text-base transition-all duration-300 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-microchip-ai text-cyberBlue-400"></i> Try KAI Sandbox Demo
+                    </a>
+                </div>
+
+                <div class="text-xs text-slate-500 pt-2 flex items-center justify-center gap-6">
+                    <span><i class="fa-solid fa-shield-halved text-emerald-400 mr-1.5"></i> Dual-Encrypted Data</span>
+                    <span><i class="fa-solid fa-bolt text-kingGold-400 mr-1.5"></i> Simulated Token Engine</span>
+                    <span><i class="fa-solid fa-cube text-cyberBlue-400 mr-1.5"></i> Multichain Foundation</span>
+                </div>
+            </div>
+
+            <!-- Ecosystem Triquetra Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6">
+                <!-- Card KAI -->
+                <div class="glass-panel hover:border-kingGold-500/30 p-6 rounded-2xl transition-all duration-300 group hover:-translate-y-1">
+                    <div class="h-12 w-12 rounded-xl bg-kingGold-500/10 border border-kingGold-500/20 flex items-center justify-center text-kingGold-400 text-2xl mb-5 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-brain-circuit"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold font-futuristic text-kingGold-100 mb-2">🧠 KAI Core Intelligence</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                        A deeply personal AI model designed to align with your habits, emotional signals, and objectives. Mentors, mirrors, and motivates without compromising privacy or human authority.
+                    </p>
+                    <span class="text-xs font-bold text-cyberBlue-300 uppercase tracking-wider"><i class="fa-solid fa-badge-check mr-1.5"></i> Deep Personalization</span>
+                </div>
+
+                <!-- Card The Hive -->
+                <div class="glass-panel hover:border-cyberBlue-500/30 p-6 rounded-2xl transition-all duration-300 group hover:-translate-y-1">
+                    <div class="h-12 w-12 rounded-xl bg-cyberBlue-500/10 border border-cyberBlue-500/20 flex items-center justify-center text-cyberBlue-400 text-2xl mb-5 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-cubes"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold font-futuristic text-kingGold-100 mb-2">🕹️ The Hive Control Chamber</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                        Your decentralized operations center. Consolidates biometric telemetry, system metrics, secure localized history vaults, transaction records, and autonomous device controls.
+                    </p>
+                    <span class="text-xs font-bold text-kingGold-300 uppercase tracking-wider"><i class="fa-solid fa-sparkles mr-1.5"></i> Real-time Dashboard</span>
+                </div>
+
+                <!-- Card KB Drone -->
+                <div class="glass-panel hover:border-kingGold-500/30 p-6 rounded-2xl transition-all duration-300 group hover:-translate-y-1">
+                    <div class="h-12 w-12 rounded-xl bg-kingGold-500/10 border border-kingGold-500/20 flex items-center justify-center text-kingGold-400 text-2xl mb-5 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-drone"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold font-futuristic text-kingGold-100 mb-2">🐝 KB Robotic Guardians</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                        Sleek physical drone assistants executing real-time atmospheric security tracking, environmental hazard reporting, and synchronization direct with your Hive repository.
+                    </p>
+                    <span class="text-xs font-bold text-cyberBlue-300 uppercase tracking-wider"><i class="fa-solid fa-battery-bolt mr-1.5"></i> Physical Extensions</span>
+                </div>
+            </div>
+
+            <!-- Free Sandbox KAI Terminal -->
+            <div id="kai-sandbox" class="pt-10 scroll-mt-24">
+                <div class="glass-panel rounded-2xl border border-cyberBlue-500/25 overflow-hidden shadow-dualGlow">
+                    <!-- Console Titlebar -->
+                    <div class="bg-hiveDark-900 border-b border-white/5 px-6 py-4 flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <span class="relative flex h-3 w-3">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyberBlue-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-3 w-3 bg-cyberBlue-500"></span>
+                            </span>
+                            <div class="font-futuristic">
+                                <span class="text-base font-bold text-kingGold-100">KAI COGNITIVE SANDBOX DEMO</span>
+                                <span class="text-xs text-slate-400 block -mt-1">Operational Mode: Public Whitelist Sandbox</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs bg-kingGold-600/15 text-kingGold-300 font-bold border border-kingGold-500/20 px-2.5 py-1 rounded">PRE-WHITELIST</span>
+                        </div>
+                    </div>
+
+                    <!-- Sandbox Chat Space -->
+                    <div class="grid grid-cols-1 lg:grid-cols-3 min-h-[450px]">
+                        <!-- Chat Panel -->
+                        <div class="lg:col-span-2 flex flex-col justify-between border-r border-white/5 p-6 space-y-4">
+                            <!-- Messages -->
+                            <div id="sandbox-messages" class="flex-grow overflow-y-auto space-y-4 pr-2 max-h-[320px]">
+                                <!-- Bot message -->
+                                <div class="flex gap-3 max-w-[85%]">
+                                    <div class="h-8 w-8 rounded-lg bg-kingGold-500/10 border border-kingGold-500/20 flex items-center justify-center text-kingGold-400 text-sm shrink-0">
+                                        <i class="fa-solid fa-brain-circuit"></i>
+                                    </div>
+                                    <div class="p-4 rounded-2xl bg-hiveDark-850 border border-white/5 text-sm text-slate-200 leading-relaxed">
+                                        Greetings! I am <span class="text-kingGold-400 font-bold">KAI (Kinngs Artificial Intelligence)</span>. I am here to assist your personal growth, protect your system assets, and accelerate your productivity. Try asking me about our system vision or task strategies!
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Input Bar -->
+                            <div class="space-y-3">
+                                <div class="flex gap-2">
+                                    <input id="sandbox-input" type="text" placeholder="Inquire about KAI, The Hive, $KNGS or KB..." class="flex-grow bg-hiveDark-900 border border-white/10 rounded-xl px-4 py-3 text-sm text-slate-200 placeholder:text-slate-500 focus:outline-none focus:border-kingGold-500 transition-colors" onkeydown="if(event.key === 'Enter') sendSandboxMessage()">
+                                    <button onclick="sendSandboxMessage()" class="px-5 py-3 rounded-xl bg-gradient-to-r from-kingGold-600 to-kingGold-500 text-hiveDark-900 font-bold text-sm hover:scale-[1.02] transition-transform">
+                                        <i class="fa-solid fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                                <div class="flex flex-wrap gap-2 text-xs text-slate-400 items-center">
+                                    <span class="font-bold text-kingGold-300">Quick Prompts:</span>
+                                    <button onclick="quickPrompt('What is the core mission of KINNGS AI?')" class="bg-hiveDark-800 hover:bg-hiveDark-700 border border-white/5 px-2.5 py-1 rounded transition-colors">🎯 Core Mission</button>
+                                    <button onclick="quickPrompt('How does the Hive protect my data privacy?')" class="bg-hiveDark-800 hover:bg-hiveDark-700 border border-white/5 px-2.5 py-1 rounded transition-colors">🔐 Privacy & Security</button>
+                                    <button onclick="quickPrompt('Tell me about the KB Drones.')" class="bg-hiveDark-800 hover:bg-hiveDark-700 border border-white/5 px-2.5 py-1 rounded transition-colors">🐝 KB Drones</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Info Panel -->
+                        <div class="bg-hiveDark-850/50 p-6 flex flex-col justify-between space-y-6">
+                            <div class="space-y-4">
+                                <h4 class="text-lg font-bold text-kingGold-100 font-futuristic uppercase border-b border-white/5 pb-2">KAI Dynamic Core Metrics</h4>
+                                <div class="space-y-3 text-xs">
+                                    <div class="flex justify-between items-center bg-hiveDark-900/60 p-2.5 rounded-lg border border-white/5">
+                                        <span class="text-slate-400">Context Memory Banks</span>
+                                        <span class="font-mono text-cyberBlue-400 font-bold">128 GB Local Sandbox</span>
+                                    </div>
+                                    <div class="flex justify-between items-center bg-hiveDark-900/60 p-2.5 rounded-lg border border-white/5">
+                                        <span class="text-slate-400">Personalization Index</span>
+                                        <span class="font-mono text-kingGold-400 font-bold">Active (Dynamic Sync)</span>
+                                    </div>
+                                    <div class="flex justify-between items-center bg-hiveDark-900/60 p-2.5 rounded-lg border border-white/5">
+                                        <span class="text-slate-400">Interactive Response Latency</span>
+                                        <span class="font-mono text-emerald-400 font-bold">~ 42ms (E2E)</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="p-4 rounded-xl bg-gradient-to-br from-kingGold-900/40 to-hiveDark-900 border border-kingGold-500/20 space-y-3 text-sm">
+                                <div class="font-bold font-futuristic text-kingGold-300"><i class="fa-solid fa-lock mr-2"></i> Elevate to Core Companion</div>
+                                <p class="text-xs text-slate-400">
+                                    Establish local user credentials, synchronize a Web3 wallet address, and claim booster multipliers to access persistent memories, habits profiling, and private Hive command parameters.
+                                </p>
+                                <button onclick="startOnboarding()" class="w-full py-2 rounded-lg bg-kingGold-500 hover:bg-kingGold-400 text-hiveDark-900 font-bold text-xs transition-colors">
+                                    <i class="fa-solid fa-user-plus mr-1"></i> Sync Whitelist Profile
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Roadmap Phase Blocks -->
+            <div class="space-y-6">
+                <h3 class="text-3xl font-bold font-futuristic text-center text-kingGold-100 uppercase">Ecosystem Launch Matrix</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="glass-panel border-kingGold-500/20 p-6 rounded-2xl space-y-4 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 px-3 py-1 bg-kingGold-500 text-hiveDark-900 text-xs font-bold font-futuristic tracking-wider uppercase rounded-bl-xl">Active</div>
+                        <h4 class="text-xl font-bold font-futuristic text-kingGold-300">Phase 1: Whitelist & Foundation</h4>
+                        <ul class="text-sm text-slate-400 space-y-2">
+                            <li><i class="fa-solid fa-circle-check text-kingGold-400 mr-2"></i> $KINNGS Engagement Launch</li>
+                            <li><i class="fa-solid fa-circle-check text-kingGold-400 mr-2"></i> KAI Prototype Architecture</li>
+                            <li><i class="fa-solid fa-circle-check text-kingGold-400 mr-2"></i> Localized Firebase Vault setup</li>
+                            <li><i class="fa-solid fa-circle-check text-kingGold-400 mr-2"></i> Dynamic Whitelist tasks engine</li>
+                        </ul>
+                    </div>
+                    <div class="glass-panel p-6 rounded-2xl space-y-4 opacity-75">
+                        <h4 class="text-xl font-bold font-futuristic text-cyberBlue-400">Phase 2: Personalization & Testnet</h4>
+                        <ul class="text-sm text-slate-400 space-y-2">
+                            <li><i class="fa-solid fa-circle-notch text-cyberBlue-400 mr-2"></i> Multi-chain contract deployments</li>
+                            <li><i class="fa-solid fa-circle-notch text-cyberBlue-400 mr-2"></i> Multi-tier Genesis NFTs launch</li>
+                            <li><i class="fa-solid fa-circle-notch text-cyberBlue-400 mr-2"></i> KAI Voice and Audio integration</li>
+                            <li><i class="fa-solid fa-circle-notch text-cyberBlue-400 mr-2"></i> Private Testnet validation loops</li>
+                        </ul>
+                    </div>
+                    <div class="glass-panel p-6 rounded-2xl space-y-4 opacity-75">
+                        <h4 class="text-xl font-bold font-futuristic text-slate-400">Phase 3: Hardware Sync & Mainnet</h4>
+                        <ul class="text-sm text-slate-400 space-y-2">
+                            <li><i class="fa-solid fa-circle-notch text-slate-400 mr-2"></i> Finalized $KNGS utility token</li>
+                            <li><i class="fa-solid fa-circle-notch text-slate-400 mr-2"></i> Solar-electric KB Drone Prototype</li>
+                            <li><i class="fa-solid fa-circle-notch text-slate-400 mr-2"></i> Fully decentralized Hive ecosystem</li>
+                            <li><i class="fa-solid fa-circle-notch text-slate-400 mr-2"></i> Production wearable hardware modules</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= ONBOARDING STEPPED FLOW ================= -->
+        <div id="view-onboarding" class="hidden max-w-2xl mx-auto py-10">
+            <div class="glass-panel-gold rounded-3xl p-8 space-y-8 relative overflow-hidden shadow-dualGlow">
+                <!-- Glowing effect border -->
+                <div class="absolute inset-0 bg-gradient-to-br from-kingGold-500/5 to-transparent pointer-events-none"></div>
+
+                <!-- Onboarding Header -->
+                <div class="text-center space-y-2 relative">
+                    <div class="font-futuristic text-sm font-bold tracking-widest text-kingGold-400 uppercase">Hive Sync Portal</div>
+                    <h2 class="text-3xl font-bold font-futuristic text-kingGold-100 uppercase">Onboard Whitelist Credentials</h2>
+                    <p class="text-slate-400 text-xs">Establish your unique ecosystem node to unlock $KINNGS rewards & boosters.</p>
+                </div>
+
+                <!-- Progress Bar steps indicator -->
+                <div class="flex items-center justify-between px-4 max-w-md mx-auto relative">
+                    <div id="ob-bar-1" class="h-1 flex-grow bg-kingGold-500 transition-colors duration-300"></div>
+                    <div class="h-8 w-8 rounded-full border-2 border-kingGold-500 bg-hiveDark-900 flex items-center justify-center font-mono text-xs font-bold text-kingGold-400 z-10" id="step-dot-1">1</div>
+                    <div id="ob-bar-2" class="h-1 flex-grow bg-hiveDark-700 transition-colors duration-300"></div>
+                    <div class="h-8 w-8 rounded-full border-2 border-hiveDark-700 bg-hiveDark-900 flex items-center justify-center font-mono text-xs font-bold text-slate-500 z-10" id="step-dot-2">2</div>
+                    <div id="ob-bar-3" class="h-1 flex-grow bg-hiveDark-700 transition-colors duration-300"></div>
+                    <div class="h-8 w-8 rounded-full border-2 border-hiveDark-700 bg-hiveDark-900 flex items-center justify-center font-mono text-xs font-bold text-slate-500 z-10" id="step-dot-3">3</div>
+                    <div id="ob-bar-4" class="h-1 flex-grow bg-hiveDark-700 transition-colors duration-300"></div>
+                    <div class="h-8 w-8 rounded-full border-2 border-hiveDark-700 bg-hiveDark-900 flex items-center justify-center font-mono text-xs font-bold text-slate-500 z-10" id="step-dot-4">4</div>
+                    <div id="ob-bar-5" class="h-1 flex-grow bg-hiveDark-700 transition-colors duration-300"></div>
+                </div>
+
+                <!-- Step Contents -->
+                <div class="space-y-6 relative min-h-[250px] flex flex-col justify-between">
+                    
+                    <!-- STEP 1: Email Auth Registration -->
+                    <div id="step-content-1" class="space-y-4">
+                        <div class="space-y-2">
+                            <label class="block text-xs font-bold text-kingGold-300 uppercase tracking-wider">Secure Node Email</label>
+                            <input type="email" id="ob-email" placeholder="enter your primary developer or builder email..." class="w-full bg-hiveDark-900 border border-white/10 rounded-xl px-4 py-3 text-sm text-slate-200 placeholder:text-slate-500 focus:outline-none focus:border-kingGold-500 transition-colors">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="block text-xs font-bold text-kingGold-300 uppercase tracking-wider">Access Passphrase</label>
+                            <input type="password" id="ob-pass" placeholder="secure system password..." class="w-full bg-hiveDark-900 border border-white/10 rounded-xl px-4 py-3 text-sm text-slate-200 placeholder:text-slate-500 focus:outline-none focus:border-kingGold-500 transition-colors">
+                        </div>
+                        <p class="text-[11px] text-slate-500"><i class="fa-solid fa-lock text-kingGold-400 mr-1.5"></i> All local identity keys are hashed and stored within verified secure compartments.</p>
+                    </div>
+
+                    <!-- STEP 2: Web3 Wallet Connect -->
+                    <div id="step-content-2" class="hidden space-y-6">
+                        <div class="text-center py-4 space-y-2">
+                            <i class="fa-solid fa-wallet text-5xl text-cyberBlue-400 animate-pulse"></i>
+                            <h4 class="text-lg font-bold font-futuristic text-slate-200 uppercase">Connect Your Ecosystem Wallet</h4>
+                            <p class="text-xs text-slate-400">Supported networks for Phase 1 distribution boosters: Solana, Ethereum, & Sui.</p>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                            <button onclick="simulateWalletConnect('Solana')" class="p-4 rounded-xl bg-hiveDark-900 border border-white/5 hover:border-kingGold-500/40 text-center space-y-2 transition-all">
+                                <i class="fa-solid fa-sun text-2xl text-purple-400"></i>
+                                <div class="text-xs font-bold block text-slate-300">Solana Sync</div>
+                            </button>
+                            <button onclick="simulateWalletConnect('Ethereum')" class="p-4 rounded-xl bg-hiveDark-900 border border-white/5 hover:border-kingGold-500/40 text-center space-y-2 transition-all">
+                                <i class="fa-brands fa-ethereum text-2xl text-blue-400"></i>
+                                <div class="text-xs font-bold block text-slate-300">Ethereum Core</div>
+                            </button>
+                            <button onclick="simulateWalletConnect('Sui')" class="p-4 rounded-xl bg-hiveDark-900 border border-white/5 hover:border-kingGold-500/40 text-center space-y-2 transition-all">
+                                <i class="fa-solid fa-droplet text-2xl text-sky-400"></i>
+                                <div class="text-xs font-bold block text-slate-300">Sui Hub</div>
+                            </button>
+                        </div>
+                        <div id="wallet-connected-display" class="hidden bg-emerald-950/20 border border-emerald-500/30 p-3 rounded-xl flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-badge-check text-emerald-400"></i>
+                                <span class="text-xs font-semibold text-slate-300">Successfully Connected:</span>
+                            </div>
+                            <span id="connected-wallet-address" class="font-mono text-xs text-emerald-400 font-bold"></span>
+                        </div>
+                    </div>
+
+                    <!-- STEP 3: Connect Social Accounts -->
+                    <div id="step-content-3" class="hidden space-y-4">
+                        <h4 class="text-center text-sm text-slate-400">Sync with social pipelines to unlock automated whitelist community quests.</h4>
+                        
+                        <div class="space-y-3">
+                            <!-- X (Twitter) -->
+                            <div class="flex items-center justify-between p-3 rounded-xl bg-hiveDark-900 border border-white/5">
+                                <div class="flex items-center gap-3">
+                                    <div class="h-9 w-9 rounded bg-white/5 flex items-center justify-center text-slate-200 text-lg">
+                                        <i class="fa-brands fa-x-twitter"></i>
+                                    </div>
+                                    <div class="text-xs font-bold text-slate-300">X (Twitter) Pipeline</div>
+                                </div>
+                                <button id="social-btn-x" onclick="connectSocial('x')" class="px-4 py-1.5 rounded bg-cyberBlue-600 hover:bg-cyberBlue-500 text-hiveDark-900 font-bold text-xs">Connect</button>
+                            </div>
+
+                            <!-- Discord -->
+                            <div class="flex items-center justify-between p-3 rounded-xl bg-hiveDark-900 border border-white/5">
+                                <div class="flex items-center gap-3">
+                                    <div class="h-9 w-9 rounded bg-indigo-600/10 flex items-center justify-center text-indigo-400 text-lg">
+                                        <i class="fa-brands fa-discord"></i>
+                                    </div>
+                                    <div class="text-xs font-bold text-slate-300">Discord Headquarters</div>
+                                </div>
+                                <button id="social-btn-discord" onclick="connectSocial('discord')" class="px-4 py-1.5 rounded bg-cyberBlue-600 hover:bg-cyberBlue-500 text-hiveDark-900 font-bold text-xs">Connect</button>
+                            </div>
+
+                            <!-- Telegram -->
+                            <div class="flex items-center justify-between p-3 rounded-xl bg-hiveDark-900 border border-white/5">
+                                <div class="flex items-center gap-3">
+                                    <div class="h-9 w-9 rounded bg-sky-600/10 flex items-center justify-center text-sky-400 text-lg">
+                                        <i class="fa-brands fa-telegram"></i>
+                                    </div>
+                                    <div class="text-xs font-bold text-slate-300">Telegram Alert Channel</div>
+                                </div>
+                                <button id="social-btn-telegram" onclick="connectSocial('telegram')" class="px-4 py-1.5 rounded bg-cyberBlue-600 hover:bg-cyberBlue-500 text-hiveDark-900 font-bold text-xs">Connect</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 4: Choose Username & Ref Code -->
+                    <div id="step-content-4" class="hidden space-y-4">
+                        <div class="space-y-2">
+                            <label class="block text-xs font-bold text-kingGold-300 uppercase tracking-wider">Ecosystem Username</label>
+                            <input type="text" id="ob-username" placeholder="Choose unique identifier..." class="w-full bg-hiveDark-900 border border-white/10 rounded-xl px-4 py-3 text-sm text-slate-200 focus:outline-none focus:border-kingGold-500" onkeyup="updateReferralCodePreview()">
+                        </div>
+                        <div class="bg-hiveDark-900/60 p-4 rounded-xl border border-white/5 space-y-2">
+                            <span class="text-xs text-slate-500 block">YOUR UNIQUE REFERRAL LINK</span>
+                            <div class="flex items-center justify-between gap-2">
+                                <span id="ref-code-preview" class="font-mono text-xs text-kingGold-300 font-bold select-all"></span>
+                                <button onclick="copyReferralLink()" class="px-3 py-1 bg-white/5 hover:bg-white/10 rounded text-xs text-slate-300 transition-colors"><i class="fa-solid fa-copy"></i> Copy</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 5: Initialization Screen -->
+                    <div id="step-content-5" class="hidden text-center space-y-6 py-6">
+                        <div class="relative w-24 h-24 mx-auto">
+                            <!-- Circular animated loader -->
+                            <div class="absolute inset-0 rounded-full border-4 border-white/5"></div>
+                            <div class="absolute inset-0 rounded-full border-4 border-t-kingGold-500 border-r-cyberBlue-400 animate-spin"></div>
+                            <div class="absolute inset-0 flex items-center justify-center text-2xl text-kingGold-400">
+                                <i class="fa-solid fa-cubes animate-pulse"></i>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <h4 class="text-xl font-bold font-futuristic text-slate-200">ESTABLISHING CRYPTOGRAPHIC VAULT</h4>
+                            <p class="text-xs text-slate-400 max-w-sm mx-auto">Synchronizing node metrics, memory pathways, and linking local database streams to KINNGS AI Mainframe.</p>
+                        </div>
+                        <!-- Loader visual bar -->
+                        <div class="w-full max-w-xs mx-auto bg-hiveDark-900 h-1.5 rounded-full overflow-hidden">
+                            <div id="init-loader-progress" class="h-full bg-gradient-to-r from-kingGold-500 to-cyberBlue-400 w-0 transition-all duration-[3000ms] ease-out"></div>
+                        </div>
+                    </div>
+
+                    <!-- Buttons Navigation -->
+                    <div class="flex items-center justify-between pt-6 border-t border-white/5" id="onboarding-nav-btns">
+                        <button onclick="prevStep()" id="ob-btn-back" class="hidden px-5 py-2.5 rounded-xl bg-hiveDark-900 hover:bg-hiveDark-800 text-xs font-bold text-slate-300 border border-white/5 transition-colors">
+                            <i class="fa-solid fa-arrow-left mr-2"></i> Backward
+                        </button>
+                        <div class="flex-grow"></div>
+                        <button onclick="nextStep()" id="ob-btn-next" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-kingGold-600 to-kingGold-400 text-hiveDark-900 font-bold text-sm shadow-goldGlow hover:scale-105 transition-all">
+                            Forward <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= THE HIVE CONTROL CHAMBER (DASHBOARD) ================= -->
+        <div id="view-dashboard" class="hidden space-y-8 py-4">
+            <!-- Top Dashboard Stats Bar -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="glass-panel p-4 rounded-xl border border-kingGold-500/20 flex items-center justify-between">
+                    <div class="space-y-1">
+                        <span class="text-xs text-slate-500 block uppercase font-bold tracking-wider">Booster balance</span>
+                        <div class="text-2xl font-bold font-futuristic text-kingGold-300" id="dash-balance">0 $KNGS</div>
+                    </div>
+                    <div class="h-10 w-10 bg-kingGold-500/10 rounded-lg flex items-center justify-center text-kingGold-400 text-lg">
+                        <i class="fa-solid fa-vault"></i>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-4 rounded-xl flex items-center justify-between">
+                    <div class="space-y-1">
+                        <span class="text-xs text-slate-500 block uppercase font-bold tracking-wider">Booster Multiplier</span>
+                        <div class="text-2xl font-bold font-futuristic text-cyberBlue-400" id="dash-multiplier">1.0x Active</div>
+                    </div>
+                    <div class="h-10 w-10 bg-cyberBlue-500/10 rounded-lg flex items-center justify-center text-cyberBlue-400 text-lg">
+                        <i class="fa-solid fa-arrow-up-right-dots"></i>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-4 rounded-xl flex items-center justify-between">
+                    <div class="space-y-1">
+                        <span class="text-xs text-slate-500 block uppercase font-bold tracking-wider">Sub-Node Referrals</span>
+                        <div class="text-2xl font-bold font-futuristic text-slate-200" id="dash-referrals">0 nodes</div>
+                    </div>
+                    <div class="h-10 w-10 bg-white/5 rounded-lg flex items-center justify-center text-slate-400 text-lg">
+                        <i class="fa-solid fa-network-wired"></i>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-4 rounded-xl border border-emerald-500/20 flex items-center justify-between">
+                    <div class="space-y-1">
+                        <span class="text-xs text-slate-500 block uppercase font-bold tracking-wider">Ecosystem Rank</span>
+                        <div class="text-xl font-bold font-futuristic text-emerald-400">ALPHA INITIATOR</div>
+                    </div>
+                    <div class="h-10 w-10 bg-emerald-500/10 rounded-lg flex items-center justify-center text-emerald-400 text-lg">
+                        <i class="fa-solid fa-crown"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Two-Column Control Panel Layout -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Col 1 & 2: Main Operations, Quests & Drone console -->
+                <div class="lg:col-span-2 space-y-6">
+                    
+                    <!-- Advanced Interactive Quests -->
+                    <div class="glass-panel rounded-2xl p-6 space-y-4">
+                        <div class="flex items-center justify-between border-b border-white/5 pb-3">
+                            <h3 class="text-xl font-bold font-futuristic text-kingGold-100 uppercase"><i class="fa-solid fa-list-check text-kingGold-400 mr-2"></i> Community Accelerator Quests</h3>
+                            <span class="text-xs text-slate-400 bg-white/5 px-2.5 py-1 rounded">Daily updates available</span>
+                        </div>
+
+                        <div class="space-y-3">
+                            <!-- Quest 1 -->
+                            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 rounded-xl bg-hiveDark-900 border border-white/5 hover:border-kingGold-500/10 transition-colors gap-4">
+                                <div class="space-y-1">
+                                    <div class="flex items-center gap-2">
+                                        <span class="px-2 py-0.5 rounded bg-sky-500/10 text-sky-400 text-[10px] font-bold">X (Twitter)</span>
+                                        <h4 class="text-sm font-bold text-slate-200">Follow Kinngs AI Official Account</h4>
+                                    </div>
+                                    <p class="text-xs text-slate-400">Join our social updates stream on X to monitor technical milestones.</p>
+                                </div>
+                                <div class="flex items-center gap-3 shrink-0">
+                                    <span class="text-xs font-bold text-kingGold-400"><i class="fa-solid fa-plus mr-1"></i> 50 $KNGS</span>
+                                    <button id="q-btn-twitter" onclick="completeQuest('twitter')" class="px-4 py-1.5 rounded bg-gradient-to-r from-kingGold-600 to-kingGold-400 text-hiveDark-900 font-bold text-xs hover:scale-105 transition-transform">Claim Boost</button>
+                                </div>
+                            </div>
+
+                            <!-- Quest 2 -->
+                            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 rounded-xl bg-hiveDark-900 border border-white/5 hover:border-kingGold-500/10 transition-colors gap-4">
+                                <div class="space-y-1">
+                                    <div class="flex items-center gap-2">
+                                        <span class="px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-400 text-[10px] font-bold">Discord</span>
+                                        <h4 class="text-sm font-bold text-slate-200">Join Whitelist Discord Headquarters</h4>
+                                    </div>
+                                    <p class="text-xs text-slate-400">Authenticate your presence in the developers and builders Discord guild.</p>
+                                </div>
+                                <div class="flex items-center gap-3 shrink-0">
+                                    <span class="text-xs font-bold text-kingGold-400"><i class="fa-solid fa-plus mr-1"></i> 75 $KNGS</span>
+                                    <button id="q-btn-discord" onclick="completeQuest('discord')" class="px-4 py-1.5 rounded bg-gradient-to-r from-kingGold-600 to-kingGold-400 text-hiveDark-900 font-bold text-xs hover:scale-105 transition-transform">Claim Boost</button>
+                                </div>
+                            </div>
+
+                            <!-- Quest 3 -->
+                            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 rounded-xl bg-hiveDark-900 border border-white/5 hover:border-kingGold-500/10 transition-colors gap-4">
+                                <div class="space-y-1">
+                                    <div class="flex items-center gap-2">
+                                        <span class="px-2 py-0.5 rounded bg-kingGold-500/10 text-kingGold-400 text-[10px] font-bold">Zealy</span>
+                                        <h4 class="text-sm font-bold text-slate-200">Synchronize daily Zealy builder tasks</h4>
+                                    </div>
+                                    <p class="text-xs text-slate-400">Complete quests, earn multipliers, and lock in alpha generation rates.</p>
+                                </div>
+                                <div class="flex items-center gap-3 shrink-0">
+                                    <span class="text-xs font-bold text-kingGold-400"><i class="fa-solid fa-plus mr-1"></i> +0.1x Multiplier</span>
+                                    <button id="q-btn-zealy" onclick="completeQuest('zealy')" class="px-4 py-1.5 rounded bg-gradient-to-r from-kingGold-600 to-kingGold-400 text-hiveDark-900 font-bold text-xs hover:scale-105 transition-transform">Sync Quests</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- KB Drone Core Terminal Console -->
+                    <div class="glass-panel rounded-2xl p-6 space-y-4">
+                        <div class="flex items-center justify-between border-b border-white/5 pb-3">
+                            <div class="flex items-center gap-3">
+                                <i class="fa-solid fa-drone text-kingGold-400 text-xl animate-pulse"></i>
+                                <h3 class="text-xl font-bold font-futuristic text-kingGold-100 uppercase">KB (Kinngs Bee) Status Monitor</h3>
+                            </div>
+                            <span class="relative flex h-2 w-2">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                            </span>
+                        </div>
+
+                        <!-- Telemetry Grid -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <!-- Live Camera Feed Simulation -->
+                            <div class="relative bg-black rounded-xl border border-white/10 h-44 overflow-hidden flex flex-col justify-between p-4">
+                                <!-- Scanning Grid Line -->
+                                <div class="absolute inset-0 bg-[radial-gradient(rgba(0,0,0,0)_60%,rgba(0,0,0,0.85)_100%)] pointer-events-none"></div>
+                                <div class="scanning-line absolute left-0 right-0 pointer-events-none"></div>
+                                
+                                <div class="flex items-center justify-between z-10">
+                                    <span class="text-[10px] bg-red-600 px-1.5 py-0.5 rounded font-bold text-white tracking-widest uppercase animate-pulse"><i class="fa-solid fa-video"></i> Feed Live</span>
+                                    <span class="text-[10px] font-mono text-slate-400" id="drone-timestamp"></span>
+                                </div>
+
+                                <div class="text-center py-4 z-10 flex flex-col items-center justify-center">
+                                    <svg class="w-12 h-12 text-kingGold-400 drop-shadow-[0_0_5px_rgba(212,155,26,0.5)]" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <!-- Custom Drone Minimal SVG -->
+                                        <path d="M10,50 L90,50" stroke="#ffd700" stroke-width="4"/>
+                                        <circle cx="50" cy="50" r="10" fill="#00e5ff" />
+                                        <path d="M20,35 L20,65 M80,35 L80,65" stroke="#ffd700" stroke-width="2"/>
+                                    </svg>
+                                    <span class="text-xs text-cyberBlue-300 font-bold block mt-2">Drone Node: KB-001 "Beekeeper"</span>
+                                </div>
+
+                                <div class="flex items-center justify-between text-[10px] text-slate-400 font-mono z-10">
+                                    <span>H: 1540px / V: 890px</span>
+                                    <span>FPS: 60.0</span>
+                                </div>
+                            </div>
+
+                            <!-- Controls & Statistics -->
+                            <div class="space-y-3 flex flex-col justify-between">
+                                <div class="grid grid-cols-2 gap-2 text-xs">
+                                    <div class="bg-hiveDark-900 p-2.5 rounded border border-white/5 space-y-1">
+                                        <span class="text-slate-500 uppercase block font-bold">Drone Battery</span>
+                                        <div class="flex items-center gap-1.5">
+                                            <i class="fa-solid fa-battery-three-quarters text-emerald-400"></i>
+                                            <span class="font-bold text-slate-200" id="drone-battery">87% (Solar Core)</span>
+                                        </div>
+                                    </div>
+                                    <div class="bg-hiveDark-900 p-2.5 rounded border border-white/5 space-y-1">
+                                        <span class="text-slate-500 uppercase block font-bold">Altitude Status</span>
+                                        <div class="flex items-center gap-1.5">
+                                            <i class="fa-solid fa-arrows-up-down text-cyberBlue-400"></i>
+                                            <span class="font-bold text-slate-200" id="drone-altitude">12.4m</span>
+                                        </div>
+                                    </div>
+                                    <div class="bg-hiveDark-900 p-2.5 rounded border border-white/5 space-y-1">
+                                        <span class="text-slate-500 uppercase block font-bold">System Status</span>
+                                        <span class="font-bold text-emerald-400 block" id="drone-status">PATROLLING</span>
+                                    </div>
+                                    <div class="bg-hiveDark-900 p-2.5 rounded border border-white/5 space-y-1">
+                                        <span class="text-slate-500 uppercase block font-bold">Encrypted Logs</span>
+                                        <span class="font-bold text-slate-200 block">Symmetric AES-256</span>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-2">
+                                    <div class="flex gap-2">
+                                        <button onclick="droneAction('scan')" class="flex-grow py-2 rounded bg-hiveDark-900 hover:bg-hiveDark-800 border border-white/10 text-xs font-bold text-slate-200 hover:border-kingGold-500/30 transition-all"><i class="fa-solid fa-radar mr-1.5"></i> Scan Area</button>
+                                        <button onclick="droneAction('charge')" class="flex-grow py-2 rounded bg-hiveDark-900 hover:bg-hiveDark-800 border border-white/10 text-xs font-bold text-slate-200 hover:border-kingGold-500/30 transition-all"><i class="fa-solid fa-solar-panel mr-1.5"></i> Solar Sync</button>
+                                    </div>
+                                    <button onclick="droneAction('log')" class="w-full py-2 rounded bg-kingGold-500 hover:bg-kingGold-400 text-hiveDark-900 font-bold text-xs transition-all"><i class="fa-solid fa-receipt mr-1.5"></i> Output telemetry records</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Live Logging Console -->
+                        <div class="bg-black/80 rounded-lg p-3 border border-white/5 font-mono text-[11px] text-emerald-400 space-y-1 h-24 overflow-y-auto" id="drone-log-box">
+                            <div>[SYSTEM]: Initializing secure Drone console handshake...</div>
+                            <div>[SECURE]: Handshake complete. AES-256 validation verified.</div>
+                            <div>[GPS]: Location synced with physical coordinates node ID KB-001.</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Col 3: Advanced Whitelisted KAI Companion -->
+                <div class="space-y-6">
+                    <!-- Dashboard KAI Core Companion -->
+                    <div class="glass-panel rounded-2xl p-5 border border-cyberBlue-500/20 flex flex-col min-h-[500px] justify-between">
+                        <div class="space-y-4">
+                            <!-- Bot status profile -->
+                            <div class="flex items-center gap-3 border-b border-white/5 pb-3">
+                                <div class="h-10 w-10 rounded-xl bg-kingGold-500/10 border border-kingGold-500/20 flex items-center justify-center text-kingGold-400 text-xl relative shrink-0">
+                                    <i class="fa-solid fa-brain-circuit"></i>
+                                    <span class="absolute -top-1 -right-1 h-3 w-3 bg-emerald-500 rounded-full border-2 border-hiveDark-900 animate-pulse"></span>
+                                </div>
+                                <div class="font-futuristic">
+                                    <h4 class="text-sm font-bold text-slate-200 leading-none">KAI Core Companion</h4>
+                                    <span class="text-[10px] text-slate-400 block mt-0.5">Mode: Persistent Memory Enabled</span>
+                                </div>
+                            </div>
+
+                            <!-- Biometrics and user state tracker -->
+                            <div class="bg-hiveDark-900 p-3 rounded-xl space-y-2 border border-white/5">
+                                <span class="text-[10px] text-slate-500 block uppercase font-bold tracking-wider">KAI Cognitive Analysis</span>
+                                <div class="flex items-center justify-between text-xs">
+                                    <span class="text-slate-400">Habit Score Tracker</span>
+                                    <span class="font-bold text-kingGold-400">92% Discipline</span>
+                                </div>
+                                <div class="w-full bg-hiveDark-800 h-1.5 rounded-full overflow-hidden">
+                                    <div class="h-full bg-kingGold-500 w-[92%]"></div>
+                                </div>
+                                <div class="flex items-center justify-between text-[10px] text-slate-400">
+                                    <span>Focus: HIGH</span>
+                                    <span>Daily memory updates stored: 14</span>
+                                </div>
+                            </div>
+
+                            <!-- Messaging content Area -->
+                            <div id="dash-messages" class="space-y-3 overflow-y-auto pr-1 max-h-[220px] text-xs">
+                                <div class="flex gap-2">
+                                    <div class="p-3 rounded-xl bg-hiveDark-900 text-slate-300 leading-relaxed border border-white/5">
+                                        Vault connection authenticated! Welcome back, <span class="text-kingGold-400 font-bold" id="companion-username">User</span>. Your cognitive metrics are exceptional today. Focus parameters set. Inquire or command me.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Chat Input Block -->
+                        <div class="space-y-3 pt-3">
+                            <div class="flex gap-1.5">
+                                <input id="dash-input" type="text" placeholder="Engage custom cognitive prompt..." class="flex-grow bg-hiveDark-900 border border-white/10 rounded-xl px-3 py-2 text-xs text-slate-200 placeholder:text-slate-500 focus:outline-none focus:border-kingGold-500" onkeydown="if(event.key === 'Enter') sendDashMessage()">
+                                <button onclick="sendDashMessage()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-kingGold-600 to-kingGold-500 text-hiveDark-900 font-bold text-xs">
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                </button>
+                            </div>
+                            <!-- Memory status badge -->
+                            <div class="flex items-center justify-between text-[10px] text-slate-500">
+                                <span><i class="fa-solid fa-database mr-1"></i> Data stored locally + cloud</span>
+                                <span class="text-cyberBlue-400"><i class="fa-solid fa-circle-check"></i> E2E Encrypted</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER SECTION -->
+    <footer class="glass-panel border-t border-white/5 py-8 mt-12 px-4 lg:px-12">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-3">
+                <span class="text-sm font-futuristic text-slate-500 tracking-[0.2em] uppercase">For You. With You. Always. — Kinngs AI</span>
+            </div>
+            
+            <!-- Social Channels -->
+            <div class="flex items-center gap-4 text-slate-400">
+                <a href="#" class="hover:text-kingGold-400 text-lg transition-colors"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="#" class="hover:text-kingGold-400 text-lg transition-colors"><i class="fa-brands fa-discord"></i></a>
+                <a href="#" class="hover:text-kingGold-400 text-lg transition-colors"><i class="fa-brands fa-telegram"></i></a>
+                <a href="#" class="hover:text-kingGold-400 text-lg transition-colors"><i class="fa-brands fa-github"></i></a>
+            </div>
+
+            <div class="text-xs text-slate-500">
+                &copy; 2026 KINNGS AI Network. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE JAVASCRIPT STATE ENGINE -->
+    <script>
+        // System State parameters
+        let state = {
+            currentTab: 'landing',
+            onboardingStep: 1,
+            user: {
+                email: '',
+                walletAddress: '',
+                username: '',
+                referralCode: '',
+                xConnected: false,
+                discordConnected: false,
+                telegramConnected: false
+            },
+            walletConnected: false,
+            balance: 0,
+            boosterMultiplier: 1.0,
+            referralsCount: 0,
+            completedQuests: {
+                twitter: false,
+                discord: false,
+                zealy: false
+            },
+            droneState: {
+                battery: 87,
+                altitude: 12.4,
+                status: 'PATROLLING',
+                logs: [
+                    "[SYSTEM]: Initializing secure Drone console handshake...",
+                    "[SECURE]: Handshake complete. AES-256 validation verified.",
+                    "[GPS]: Location synced with physical coordinates node ID KB-001."
+                ]
+            }
+        };
+
+        // DOM elements initialization
+        window.onload = function() {
+            updateTimestamp();
+            setInterval(updateTimestamp, 1000);
+            
+            // Populate initial state to view components
+            updateReferralCodePreview();
+            
+            // Start mock telemetry update timers
+            setInterval(simulateDroneTelemetry, 8000);
+        };
+
+        // Navigation state machine
+        function navigate(tabName) {
+            // Hide all tabs
+            document.getElementById('view-landing').classList.add('hidden');
+            document.getElementById('view-onboarding').classList.add('hidden');
+            document.getElementById('view-dashboard').classList.add('hidden');
+
+            // Show active tab
+            if (tabName === 'landing') {
+                document.getElementById('view-landing').classList.remove('hidden');
+            } else if (tabName === 'onboarding') {
+                document.getElementById('view-onboarding').classList.remove('hidden');
+                updateOnboardingView();
+            } else if (tabName === 'dashboard') {
+                document.getElementById('view-dashboard').classList.remove('hidden');
+                updateDashboardView();
+            }
+            state.currentTab = tabName;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Onboarding navigation controls
+        function startOnboarding() {
+            if (state.walletConnected && state.user.username) {
+                // Already authenticated and synced
+                navigate('dashboard');
+                showToast("Welcome Back!", "Control Chamber synchronized successfully.", "gold");
+            } else {
+                navigate('onboarding');
+            }
+        }
+
+        function updateOnboardingView() {
+            // Hide all step contents
+            for (let i = 1; i <= 5; i++) {
+                document.getElementById(`step-content-${i}`).classList.add('hidden');
+                // Reset dots classes
+                const dot = document.getElementById(`step-dot-${i}`);
+                if (dot) {
+                    dot.className = "h-8 w-8 rounded-full border-2 border-hiveDark-700 bg-hiveDark-900 flex items-center justify-center font-mono text-xs font-bold text-slate-500 z-10";
+                }
+            }
+
+            // Show current step content
+            document.getElementById(`step-content-${state.onboardingStep}`).classList.remove('hidden');
+
+            // Update dots up to current step
+            for (let i = 1; i <= state.onboardingStep; i++) {
+                const dot = document.getElementById(`step-dot-${i}`);
+                if (dot) {
+                    if (i === state.onboardingStep) {
+                        dot.className = "h-8 w-8 rounded-full border-2 border-kingGold-500 bg-hiveDark-900 flex items-center justify-center font-mono text-xs font-bold text-kingGold-400 z-10 shadow-goldGlow";
+                    } else {
+                        dot.className = "h-8 w-8 rounded-full border-2 border-emerald-500 bg-hiveDark-900 flex items-center justify-center font-mono text-xs font-bold text-emerald-400 z-10";
+                    }
+                }
+            }
+
+            // Update indicators connector lines
+            for (let i = 1; i <= 4; i++) {
+                const bar = document.getElementById(`ob-bar-${i}`);
+                if (bar) {
+                    if (i < state.onboardingStep) {
+                        bar.className = "h-1 flex-grow bg-kingGold-500 transition-colors duration-300";
+                    } else {
+                        bar.className = "h-1 flex-grow bg-hiveDark-700 transition-colors duration-300";
+                    }
+                }
+            }
+
+            // Back button control
+            const backBtn = document.getElementById('ob-btn-back');
+            if (state.onboardingStep === 1) {
+                backBtn.classList.add('hidden');
+            } else {
+                backBtn.classList.remove('hidden');
+            }
+
+            // Next button text
+            const nextBtn = document.getElementById('ob-btn-next');
+            if (state.onboardingStep === 4) {
+                nextBtn.innerHTML = `Establish Sync <i class="fa-solid fa-cube ml-2"></i>`;
+            } else if (state.onboardingStep === 5) {
+                document.getElementById('onboarding-nav-btns').classList.add('hidden');
+                // Trigger auto-completing loader simulation
+                setTimeout(runVaultInitialization, 500);
+            } else {
+                nextBtn.innerHTML = `Forward <i class="fa-solid fa-arrow-right ml-2"></i>`;
+            }
+        }
+
+        function nextStep() {
+            // Validation requirements per step
+            if (state.onboardingStep === 1) {
+                const email = document.getElementById('ob-email').value;
+                const pass = document.getElementById('ob-pass').value;
+                if (!email || !email.includes('@')) {
+                    showToast("Validation Warning", "Please enter a valid node email address.", "blue");
+                    return;
+                }
+                if (!pass || pass.length < 5) {
+                    showToast("Validation Warning", "Access Passphrase must be at least 5 characters.", "blue");
+                    return;
+                }
+                state.user.email = email;
+            }
+
+            if (state.onboardingStep === 2) {
+                if (!state.walletConnected) {
+                    showToast("Ecosystem Rule", "Please connect a Web3 wallet address to proceed.", "gold");
+                    return;
+                }
+            }
+
+            if (state.onboardingStep === 3) {
+                if (!state.user.xConnected && !state.user.discordConnected && !state.user.telegramConnected) {
+                    showToast("Community Onboarding", "Connect at least one social pipeline to continue.", "blue");
+                    return;
+                }
+            }
+
+            if (state.onboardingStep === 4) {
+                const username = document.getElementById('ob-username').value.trim();
+                if (!username || username.length < 3) {
+                    showToast("Validation Warning", "Ecosystem username must contain at least 3 characters.", "blue");
+                    return;
+                }
+                state.user.username = username;
+                state.user.referralCode = "KAI-" + username.toUpperCase() + "-" + Math.floor(1000 + Math.random() * 9000);
+            }
+
+            state.onboardingStep += 1;
+            updateOnboardingView();
+        }
+
+        function prevStep() {
+            if (state.onboardingStep > 1) {
+                state.onboardingStep -= 1;
+                updateOnboardingView();
+            }
+        }
+
+        // Onboarding actions helpers
+        function simulateWalletConnect(walletType) {
+            // Generate a fake cryptographic address matching network standards
+            let prefix = "0x";
+            if (walletType === 'Solana') prefix = "7x";
+            if (walletType === 'Sui') prefix = "0xSui";
+            
+            const randomHash = Array.from({length: 24}, () => Math.floor(Math.random()*16).toString(16)).join('');
+            const address = `${prefix}${randomHash.substring(0, 6)}...${randomHash.substring(18)}`;
+            
+            state.user.walletAddress = address;
+            state.walletConnected = true;
+
+            // Update onboarding elements
+            document.getElementById('wallet-connected-display').classList.remove('hidden');
+            document.getElementById('connected-wallet-address').innerText = `${walletType} [${address}]`;
+            
+            showToast("Wallet Synced", `Successfully handshaked with ${walletType} Node address!`, "gold");
+        }
+
+        function connectSocial(socialType) {
+            state.user[`${socialType}Connected`] = true;
+            const btn = document.getElementById(`social-btn-${socialType}`);
+            btn.innerHTML = `<i class="fa-solid fa-circle-check"></i> Connected`;
+            btn.className = "px-4 py-1.5 rounded bg-emerald-500 text-hiveDark-900 font-bold text-xs";
+            
+            showToast("Pipeline Synchronized", `${socialType.toUpperCase()} alerts stream established.`, "blue");
+        }
+
+        function updateReferralCodePreview() {
+            const username = document.getElementById('ob-username').value.trim() || "USERNAME";
+            const previewText = `https://kinngs.ai/join?ref=KAI-${username.toUpperCase()}`;
+            document.getElementById('ref-code-preview').innerText = previewText;
+        }
+
+        function copyReferralLink() {
+            const text = document.getElementById('ref-code-preview').innerText;
+            // Native fallback for iframe container context
+            const el = document.createElement('textarea');
+            el.value = text;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+
+            showToast("Copied to Clipboard", "Your unique node invitation link was copied.", "gold");
+        }
+
+        function runVaultInitialization() {
+            const bar = document.getElementById('init-loader-progress');
+            bar.style.width = "100%";
+
+            setTimeout(() => {
+                // Onboarding complete, migrate to dashboard
+                showToast("Node Deployed!", "Ecosystem Control Chamber active.", "gold");
+                // Enable navbar indicator badge
+                document.getElementById('user-badge').classList.remove('hidden');
+                document.getElementById('badge-username').innerText = state.user.username.toUpperCase();
+                document.getElementById('badge-balance').innerText = `${state.balance} $KNGS`;
+
+                // Update UI button state
+                const actionBtn = document.getElementById('nav-action-btn');
+                actionBtn.innerHTML = `<i class="fa-solid fa-gauge"></i> Enter Hive`;
+                actionBtn.onclick = function() { navigate('dashboard'); };
+
+                navigate('dashboard');
+            }, 3000);
+        }
+
+        // Dashboard State Render updates
+        function updateDashboardView() {
+            document.getElementById('dash-balance').innerText = `${state.balance} $KNGS`;
+            document.getElementById('badge-balance').innerText = `${state.balance} $KNGS`;
+            document.getElementById('dash-multiplier').innerText = `${state.boosterMultiplier.toFixed(1)}x Active`;
+            document.getElementById('dash-referrals').innerText = `${state.referralsCount} nodes`;
+            document.getElementById('companion-username').innerText = state.user.username;
+        }
+
+        // Interactive Quest Completion Handlers
+        function completeQuest(questId) {
+            if (questId === 'twitter') {
+                if (state.completedQuests.twitter) return;
+                state.completedQuests.twitter = true;
+                state.balance += 50;
+                
+                const btn = document.getElementById('q-btn-twitter');
+                btn.className = "px-4 py-1.5 rounded bg-emerald-500 text-hiveDark-900 font-bold text-xs pointer-events-none";
+                btn.innerHTML = `<i class="fa-solid fa-circle-check"></i> Secured`;
+                
+                showToast("Quest Complete", "Claimed 50 $KNGS tokens instantly!", "gold");
+            }
+
+            if (questId === 'discord') {
+                if (state.completedQuests.discord) return;
+                state.completedQuests.discord = true;
+                state.balance += 75;
+                
+                const btn = document.getElementById('q-btn-discord');
+                btn.className = "px-4 py-1.5 rounded bg-emerald-500 text-hiveDark-900 font-bold text-xs pointer-events-none";
+                btn.innerHTML = `<i class="fa-solid fa-circle-check"></i> Secured`;
+                
+                showToast("Quest Complete", "Claimed 75 $KNGS tokens instantly!", "gold");
+            }
+
+            if (questId === 'zealy') {
+                if (state.completedQuests.zealy) return;
+                state.completedQuests.zealy = true;
+                state.boosterMultiplier += 0.1;
+                
+                const btn = document.getElementById('q-btn-zealy');
+                btn.className = "px-4 py-1.5 rounded bg-emerald-500 text-hiveDark-900 font-bold text-xs pointer-events-none";
+                btn.innerHTML = `<i class="fa-solid fa-circle-check"></i> Connected`;
+                
+                showToast("Multiplier Synced", "Ecosystem booster rate increased by +0.1x!", "blue");
+            }
+
+            updateDashboardView();
+        }
+
+        // KB Drone console actions
+        function droneAction(actionType) {
+            const logsBox = document.getElementById('drone-log-box');
+            const batteryEl = document.getElementById('drone-battery');
+            const statusEl = document.getElementById('drone-status');
+            const altitudeEl = document.getElementById('drone-altitude');
+
+            const now = new Date().toLocaleTimeString();
+
+            if (actionType === 'scan') {
+                state.droneState.status = "SCANNING";
+                statusEl.className = "font-bold text-cyberBlue-400 block animate-pulse";
+                statusEl.innerText = "SCANNING REGION";
+
+                const log1 = `[${now}] [RADAR]: Sweeping local coordinates. Zero threats found.`;
+                const log2 = `[${now}] [BIO-RADAR]: Detected health rate optimal for linked node.`;
+                
+                state.droneState.logs.push(log1, log2);
+                logsBox.innerHTML += `<div>${log1}</div><div>${log2}</div>`;
+                showToast("KB Scanning", "Biometric atmospheric sweep active.", "blue");
+            }
+
+            if (actionType === 'charge') {
+                state.droneState.battery = 100;
+                batteryEl.innerText = "100% (Solar Maxed)";
+                
+                const log = `[${now}] [BATTERY]: Active solar-charging loop fully charged cells.`;
+                state.droneState.logs.push(log);
+                logsBox.innerHTML += `<div>${log}</div>`;
+                showToast("KB Synchronized", "Solar cell charging loops fully refreshed.", "gold");
+            }
+
+            if (actionType === 'log') {
+                // Generate a full technical block dump
+                const dump = `[${now}] [TELEMETRY_DUMP]: Context encryption status: SECURE. E2E Sync: OK. Multichain token generation: ACTIVE.`;
+                state.droneState.logs.push(dump);
+                logsBox.innerHTML += `<div class="text-kingGold-300 font-semibold">${dump}</div>`;
+                showToast("Console Log Outputted", "Active operational records parsed to local frame.", "blue");
+            }
+
+            logsBox.scrollTop = logsBox.scrollHeight;
+        }
+
+        function simulateDroneTelemetry() {
+            if (state.currentTab !== 'dashboard') return;
+
+            // Simulating active telemetry fluctuating
+            const batteryEl = document.getElementById('drone-battery');
+            const altitudeEl = document.getElementById('drone-altitude');
+            
+            if (state.droneState.battery > 10) {
+                state.droneState.battery -= 1;
+                batteryEl.innerText = `${state.droneState.battery}% (Solar Core)`;
+            }
+
+            const altDelta = (Math.random() * 2 - 1).toFixed(1);
+            state.droneState.altitude = (parseFloat(state.droneState.altitude) + parseFloat(altDelta)).toFixed(1);
+            if (state.droneState.altitude < 2) state.droneState.altitude = 5.0;
+            altitudeEl.innerText = `${state.droneState.altitude}m`;
+        }
+
+        // Custom Notification Toast Display system
+        function showToast(title, body, colorScheme) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            
+            let colorClasses = "bg-hiveDark-850 border-kingGold-500/30 text-kingGold-400";
+            let icon = `<i class="fa-solid fa-crown text-kingGold-400"></i>`;
+            
+            if (colorScheme === "blue") {
+                colorClasses = "bg-hiveDark-850 border-cyberBlue-500/30 text-cyberBlue-400";
+                icon = `<i class="fa-solid fa-sparkles text-cyberBlue-400"></i>`;
+            }
+
+            toast.className = `p-4 rounded-xl border ${colorClasses} shadow-dualGlow flex items-start gap-3 transform transition-all duration-300 translate-x-12 opacity-0 pointer-events-auto`;
+            toast.innerHTML = `
+                <div class="text-lg shrink-0">${icon}</div>
+                <div>
+                    <h5 class="font-futuristic font-bold text-sm text-slate-100 uppercase leading-none">${title}</h5>
+                    <p class="text-xs text-slate-400 mt-1 leading-normal">${body}</p>
+                </div>
+            `;
+
+            container.appendChild(toast);
+            
+            // Animate In
+            setTimeout(() => {
+                toast.classList.remove('translate-x-12', 'opacity-0');
+            }, 50);
+
+            // Animate Out & Destroy
+            setTimeout(() => {
+                toast.classList.add('translate-x-12', 'opacity-0');
+                setTimeout(() => {
+                    toast.remove();
+                }, 300);
+            }, 4500);
+        }
+
+        // Dynamic Time tracker
+        function updateTimestamp() {
+            const now = new Date();
+            const dateStr = now.toLocaleDateString();
+            const timeStr = now.toLocaleTimeString();
+            
+            const timestampEl = document.getElementById('drone-timestamp');
+            if (timestampEl) {
+                timestampEl.innerText = `${dateStr} ${timeStr}`;
+            }
+        }
+
+        // SANDBOX CONVERSATIONAL TERMINAL ENGINE (MOCK)
+        const KAI_KNOWLEDGE_BASE = {
+            "mission": "The core mission of KINNGS AI Network is: 'To richly increase and improve human productivity through deeply personalized artificial intelligence.' It guiding users to become their best versions mentally, emotionally, and socially.",
+            "privacy": "Privacy is sacred to KINNGS. All telemetry, voice profiles, and data are dual-encrypted. All processing happens on local devices and private, decentralized cloud chains. No external entity can tap into your metrics.",
+            "drone": "The KB (Kinngs Bee) Drones are autonomous solar-recharged robotic assistants. They act as guardians executing atmospheric hazard checks, health metrics processing, and local safety patrol.",
+            "token": "The $KINNGS token economy drives the ecosystem. Phase 1 lets you earn simulated tokens and multipliers by joining the whitelist, while Phase 2 and 3 introduce Genesis NFTs and the finalized multi-chain mainnet $KNGS token.",
+            "hive": "The Hive is your personalized master control chamber. It unifies all biometric statistics, local cryptographic assets, memories archives, drone logs, and active habits tracking."
+        };
+
+        function quickPrompt(promptText) {
+            document.getElementById('sandbox-input').value = promptText;
+            sendSandboxMessage();
+        }
+
+        function sendSandboxMessage() {
+            const inputEl = document.getElementById('sandbox-input');
+            const query = inputEl.value.trim();
+            if (!query) return;
+
+            const chatSpace = document.getElementById('sandbox-messages');
+            
+            // Render user message
+            const userMsg = document.createElement('div');
+            userMsg.className = "flex gap-3 max-w-[85%] ml-auto justify-end";
+            userMsg.innerHTML = `
+                <div class="p-4 rounded-2xl bg-hiveDark-800 border border-white/5 text-sm text-slate-200 leading-relaxed">
+                    ${query}
+                </div>
+            `;
+            chatSpace.appendChild(userMsg);
+            inputEl.value = "";
+            chatSpace.scrollTop = chatSpace.scrollHeight;
+
+            // Generate intelligent AI response
+            setTimeout(() => {
+                let reply = "That is a fascinating inquiry. My cognitive pathways are fine-tuning dynamically to handle deep personalization. Whitelist contributors will shape our core algorithms. Secure your node profile to start deep training!";
+                
+                const queryLower = query.toLowerCase();
+                if (queryLower.includes('mission') || queryLower.includes('goal')) {
+                    reply = KAI_KNOWLEDGE_BASE.mission;
+                } else if (queryLower.includes('privacy') || queryLower.includes('secure') || queryLower.includes('encrypt')) {
+                    reply = KAI_KNOWLEDGE_BASE.privacy;
+                } else if (queryLower.includes('drone') || queryLower.includes('kb') || queryLower.includes('bee')) {
+                    reply = KAI_KNOWLEDGE_BASE.drone;
+                } else if (queryLower.includes('token') || queryLower.includes('coin') || queryLower.includes('kngs')) {
+                    reply = KAI_KNOWLEDGE_BASE.token;
+                } else if (queryLower.includes('hive') || queryLower.includes('control') || queryLower.includes('dashboard')) {
+                    reply = KAI_KNOWLEDGE_BASE.hive;
+                }
+
+                const botMsg = document.createElement('div');
+                botMsg.className = "flex gap-3 max-w-[85%]";
+                botMsg.innerHTML = `
+                    <div class="h-8 w-8 rounded-lg bg-kingGold-500/10 border border-kingGold-500/20 flex items-center justify-center text-kingGold-400 text-sm shrink-0">
+                        <i class="fa-solid fa-brain-circuit"></i>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-hiveDark-850 border border-white/5 text-sm text-slate-200 leading-relaxed">
+                        ${reply}
+                    </div>
+                `;
+                chatSpace.appendChild(botMsg);
+                chatSpace.scrollTop = chatSpace.scrollHeight;
+            }, 750);
+        }
+
+        // COMPANION PRIVATE TERMINAL ENGINE (MOCK)
+        function sendDashMessage() {
+            const inputEl = document.getElementById('dash-input');
+            const query = inputEl.value.trim();
+            if (!query) return;
+
+            const chatSpace = document.getElementById('dash-messages');
+            
+            // User message
+            const userMsg = document.createElement('div');
+            userMsg.className = "flex gap-2 justify-end";
+            userMsg.innerHTML = `
+                <div class="p-3 rounded-xl bg-hiveDark-800 text-slate-200 border border-white/5">
+                    ${query}
+                </div>
+            `;
+            chatSpace.appendChild(userMsg);
+            inputEl.value = "";
+            chatSpace.scrollTop = chatSpace.scrollHeight;
+
+            // Response
+            setTimeout(() => {
+                const botMsg = document.createElement('div');
+                botMsg.className = "flex gap-2";
+                botMsg.innerHTML = `
+                    <div class="p-3 rounded-xl bg-hiveDark-900 text-kingGold-300 border border-kingGold-500/15">
+                        <span class="font-bold text-cyberBlue-400 mr-1">KAI:</span> Secure memory indexed. I have logged this pattern in your local database vault. Continuous productivity boosts scheduled!
+                    </div>
+                `;
+                chatSpace.appendChild(botMsg);
+                chatSpace.scrollTop = chatSpace.scrollHeight;
+            }, 600);
+        }
+    </script>
+</body>
+</html>
+
+```
